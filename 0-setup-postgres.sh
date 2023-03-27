@@ -21,9 +21,12 @@ mkdir -p /attached-disk/pgsql/14/data
 chown -R postgres:postgres /attached-disk/pgsql/
 
 # we setup postgresql with initdb
-# cat /usr/lib/systemd/system/postgresql-14.service
+cat /usr/lib/systemd/system/postgresql-14.service
+
 # Environment=PGDATA=/var/lib/pgsql/14/data/
 # update /var/lib/pgsql/14/data/ with /attached-disk/pgsql/14/data
+dnf install --nogpgcheck -y vim
+vim /usr/lib/systemd/system/postgresql-14.service
 /attached-disk/pgsql/14/data
 
 # all binary files are in /usr/pgsql-14/bin
@@ -32,14 +35,14 @@ cd /usr/pgsql-14/bin/
 # waait until see "OK" message
 ./postgresql-14-setup initdb 
 
+# while root add following line to /etc/sudoers
+echo "postgres ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop postgresql-14,/usr/bin/systemctl start postgresql-14,/usr/bin/systemctl status postgresql-14,/usr/bin/systemctl enable postgresql-14" >> /etc/sudoers
+
 # systemctl enable postgresql-14
 systemctl enable postgresql-14
 
 # systemctl start postgresql-14
 systemctl start postgresql-14
-
-# while root add following line to /etc/sudoers
-echo "postgres ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop postgresql-14,/usr/bin/systemctl start postgresql-14,/usr/bin/systemctl status postgresql-14,/usr/bin/systemctl enable postgresql-14" >> /etc/sudoers
 
 # in case of every binary operation
 cd /usr/pgsql-14/bin/

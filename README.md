@@ -10,7 +10,7 @@ docker-compose up -d
 
 - Connect rockylinux8 container to the postgres container
 ```bash
-docker exec -it rockylinux8 bash
+docker exec -it rockylinux bash
 ```
 
 - After connecting to the rockylinux8 container, run the backup script in file 0-setup-backup.sh

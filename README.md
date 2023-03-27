@@ -3,7 +3,7 @@ Simple script to backup and restore postgres databases testing with Docker.
 
 ### Guide
 
-- Run and wait for the postgres container to be ready
+- Run and wait for the postgres container to be ready.
 ```bash
 docker-compose up -d
 ``` 
